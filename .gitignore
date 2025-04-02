@@ -1,0 +1,15 @@
+# Node.js dependencies
+node_modules/
+
+# Bun-specific files
+.bun/
+
+# Environment variables
+.env
+
+# npm logs
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
