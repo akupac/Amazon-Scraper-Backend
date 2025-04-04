@@ -13,7 +13,7 @@ Link to frontend repository: [Amazon-Scraper-Front-End](https://github.com/akupa
 The scraper uses the port 3000 and has the default frontend url as `http://localhost:5173`, but you can personalize it. Todo so, create a .env file to config port and front end URL. Example:
 
 ```
-VITE_API_URL = "http://localhost:5230"
+VITE_API_URL = "http://localhost:4173"
 API_PORT = 3030
 ```
 
