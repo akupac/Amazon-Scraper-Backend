@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {JSDOM} from 'jsdom';
+import delay from 'delay';
 
 
     /**
@@ -66,6 +67,7 @@ async function searchProducts(keyword) {
         if (isNextPage) {
             try {
                 const nextPageURL = getElement(doc, selectors.nextPageButton) ? getElement(doc, selectors.nextPageButton).href : null;
+                await delay(Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000); // Random delay from 1s to 3s to avoid being blocked by Amazon
                 doc = await fetchData(baseUrl + nextPageURL);
                 currentPage++;
             } catch (error) {
@@ -93,13 +95,14 @@ async function fetchData(url) {
     const headers = {
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36',
         'Host': 'www.amazon.com',
-        'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
-        'Pragma': 'no-cache',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Sec-Fetch-Site': 'cross-site',  // Pretend we came from another site
+        'Referer': 'https://www.google.com/',  // Pretend we came from Google
+        'Cache-Control': 'max-age=0',
         'Upgrade-Insecure-Requests': 1,
     };
-    const html = await axios.get(url, {
-        headers
-    });
+    const html = await axios.get(url, {headers});
     const dom = new JSDOM(html.data);
     const doc = dom.window.document;
     return doc;
