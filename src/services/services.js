@@ -29,7 +29,7 @@ async function searchProducts(keyword) {
     try {
         doc = await fetchData(searchUrl);
     } catch (error) {
-        return console.error('Error fetching data:', error);
+        return console.error('Error fetching data:', error.message);
     }
 
     let currentPage = 1;
@@ -71,7 +71,7 @@ async function searchProducts(keyword) {
                 doc = await fetchData(baseUrl + nextPageURL);
                 currentPage++;
             } catch (error) {
-                console.error('Error fetching next page:', error);
+                console.error('Error fetching next page:', error.message);
                 return;
             }
         } else {
